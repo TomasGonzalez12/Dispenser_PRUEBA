@@ -19,7 +19,7 @@ typedef enum {
 
 #define PUERTA_CERRADA       (20)       //grados de angulos
 #define PUERTA_ABIERTA       (160)
-#define TIEMPO_BLOQUEO_MS    (5UL * 60UL * 1000UL)   // 5 min; para probar, 10000 (10 s)
+#define TIEMPO_BLOQUEO_MS    (1UL * 60UL * 1000UL)   // 1 minuto
 
 
 //Mediciones
