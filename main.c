@@ -22,7 +22,8 @@ int main(){
         switch (estado)
         {
         case ESTADO_PUERTA_CERRADA:
-            distancia = distancia_promedio();
+            //distancia = distancia_promedio();
+            distancia = tofReadDistance();
 
             // SIMULACIÓN: pulsar con la puerta cerrada = el bowl bajó del peso objetivo
             if (boton_pulsado)

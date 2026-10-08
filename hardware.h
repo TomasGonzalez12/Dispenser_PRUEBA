@@ -17,15 +17,15 @@ typedef enum {
     ESTADO_PUERTA_BLOQUEADA
 } estado_t;
 
-#define PUERTA_CERRADA       (20)       //grados de angulos
-#define PUERTA_ABIERTA       (160)
-#define TIEMPO_BLOQUEO_MS    (1UL * 60UL * 1000UL)   // 1 minuto
+#define PUERTA_CERRADA       (10)       //grados de angulos
+#define PUERTA_ABIERTA       (170)
+#define TIEMPO_BLOQUEO_MS    (10UL * 1000UL)   // 30seg
 
 
 //Mediciones
 #define N_MEDICIONES         (10)     
-#define DISTANCIA_OBJETIVO   (60)       //cm
-#define DISTANCIA_MAX_VALIDA (200)  
+#define DISTANCIA_OBJETIVO   (150)       //mm
+#define DISTANCIA_MAX_VALIDA (1000)  
 #define DISTANCIA_LEJOS      (0xFFFF)
 
 
