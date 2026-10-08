@@ -5,6 +5,7 @@
 #include "hardware/pwm.h"
 #include "hardware.h"
 #include "tof.h"
+#include "_syslist.h"
 
 //Variable globales
 t_OledParams oled;
@@ -13,6 +14,7 @@ static uint channel; //PWM
 
 void init_config(){
     stdio_init_all();
+    init_systick();
 
     //BOTON
     gpio_init(PULS_PIN);
@@ -110,7 +112,13 @@ void mostrar(estado_t estado, uint32_t distancia){
     else
         oledPrintfXy(&oled, 0, 0, "Dist: %lu mm", (unsigned long)distancia);
 
-    oledPrintfXy(&oled, 0, 20, estado == ESTADO_PUERTA_ABIERTA ? "Puerta: ABIERTA" : "Puerta: CERRADA");
+    switch (estado)
+    {
+        case ESTADO_PUERTA_ABIERTA: oledPrintfXy(&oled, 0, 20, "Puerta: ABIERTA"); break;
+        case ESTADO_PUERTA_BLOQUEADA: oledPrintfXy(&oled, 0, 20, "Puerta: BLOQUEO"); break;
+        default:                    oledPrintfXy(&oled, 0, 20, "Puerta: CERRADA"); break;
+    }
+
     oledDisplay(&oled);
 }
 

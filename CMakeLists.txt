@@ -36,6 +36,7 @@ pico_sdk_init()
 # Add executable
 add_executable(Dispenser_PRUEBA
         main.c
+        systick.c
         hardware.c
         Oled/picoOled.c
         VL53LOX/tof.c

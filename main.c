@@ -4,32 +4,27 @@
 #include "hardware.h"
 #include "picoOled.h"
 #include "tof.h"
-
-
-//Variables globales
-uint32_t promedio_VL53L0X = 0;
+#include "systick.h"
 
 int main(){
-    //Inicializaciones
     init_config();
 
     estado_t estado = ESTADO_PUERTA_CERRADA;
     uint32_t distancia = DISTANCIA_LEJOS;
     bool bowl_lleno = false;
+    uint32_t t_cierre = 0;          // instante (ms de systick) en que se cerró la puerta
 
     angulo_servo(PUERTA_CERRADA);
-    boton_pulsado = false;     
+    boton_pulsado = false;
     mostrar(estado, distancia);
-    
-    //Maquina de estados
+
     while (true){
         switch (estado)
         {
         case ESTADO_PUERTA_CERRADA:
             distancia = distancia_promedio();
 
-            // SIMULACIÓN: pulsar con la puerta cerrada = la mascota comió
-            // y el bowl bajó del peso objetivo.
+            // SIMULACIÓN: pulsar con la puerta cerrada = el bowl bajó del peso objetivo
             if (boton_pulsado)
             {
                 boton_pulsado = false;
@@ -47,13 +42,29 @@ int main(){
             break;
 
         case ESTADO_PUERTA_ABIERTA:
-            // Cierra al recibir el OK de la balanza (pulsador),
-            // sin importar la distancia actual.
+            // Cierra al recibir el OK de la balanza (pulsador), sin importar la distancia
             if (boton_pulsado)
             {
                 boton_pulsado = false;
                 angulo_servo(PUERTA_CERRADA);
                 bowl_lleno = true;
+                t_cierre = get_systick();
+                estado = ESTADO_PUERTA_BLOQUEADA;
+                mostrar(estado, distancia);
+            }
+            break;
+
+        case ESTADO_PUERTA_BLOQUEADA:
+            // SIMULACIÓN: la mascota come durante el bloqueo y el peso baja
+            if (boton_pulsado)
+            {
+                boton_pulsado = false;
+                bowl_lleno = false;
+            }
+
+            // La resta sin signo es correcta aunque el contador de ms desborde
+            if ((get_systick() - t_cierre) >= TIEMPO_BLOQUEO_MS)
+            {
                 estado = ESTADO_PUERTA_CERRADA;
                 mostrar(estado, distancia);
             }
