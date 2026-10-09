@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
+#include "hardware/adc.h"
 #include "hardware.h"
 #include "tof.h"
 #include "systick.h"
@@ -51,7 +52,7 @@ void init_config(){
     }
     
     
-    //Config PWM
+    // Config PWM
     gpio_set_function(SIG_SERVO_PIN, GPIO_FUNC_PWM);
     slice = pwm_gpio_to_slice_num(SIG_SERVO_PIN);
     channel = pwm_gpio_to_channel(SIG_SERVO_PIN);
@@ -59,6 +60,12 @@ void init_config(){
     pwm_set_wrap(slice, SERVO_TOP);
     
     pwm_set_enabled(slice, true);
+
+    /*
+    //ADC 
+    adc_init();
+    adc_gpio_init(ADC_BALANZA_PIN);
+    */
 }
 
 

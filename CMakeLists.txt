@@ -54,6 +54,7 @@ target_link_libraries(Dispenser_PRUEBA
         pico_stdlib
         hardware_i2c
         hardware_pwm
+        hardware_adc
 )
 
 # Include directories

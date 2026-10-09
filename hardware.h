@@ -45,6 +45,10 @@ extern uint32_t promedio_VL53L0X;
 #define SERVO_TOP            (59999)
 #define SERVO_DIV            (50.0f)
 
+/*
+//ADC - BALANZA
+#define ADC_BALANZA_PIN      (26)       // ADC0
+*/
 
 //PULSADOR
 #define DELAY_PULS           (30)
