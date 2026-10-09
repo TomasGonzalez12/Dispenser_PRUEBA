@@ -125,7 +125,7 @@ void mostrar(estado_t estado, uint32_t distancia){
 //Botón, gracias Claudio
 volatile bool boton_pulsado = false;
 
-static int64_t debounce_alarm_cb(alarm_id_t id, void *user_data)
+int64_t debounce_alarm_cb(alarm_id_t id, void *user_data)
 {
     if (!gpio_get(PULS_PIN)) boton_pulsado = true;
     gpio_acknowledge_irq(PULS_PIN, GPIO_IRQ_EDGE_FALL);

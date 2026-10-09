@@ -57,6 +57,6 @@ void angulo_servo(uint8_t);
 uint32_t distancia_promedio();
 void mostrar(estado_t, uint32_t);
 void puls_callback(uint, uint32_t);
-static int64_t debounce_alarm_cb(alarm_id_t id, void *user_data);
+int64_t debounce_alarm_cb(alarm_id_t id, void *user_data);
 
 #endif 

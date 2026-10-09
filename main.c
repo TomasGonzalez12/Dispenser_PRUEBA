@@ -10,7 +10,7 @@ int main(){
     init_config();
 
     estado_t estado = ESTADO_PUERTA_CERRADA;
-    uint32_t distancia = DISTANCIA_LEJOS;
+    int distancia = DISTANCIA_LEJOS;
     bool bowl_lleno = false;
     uint32_t t_cierre = 0;          // instante (ms de systick) en que se cerró la puerta
 
@@ -43,7 +43,6 @@ int main(){
             break;
 
         case ESTADO_PUERTA_ABIERTA:
-            // Cierra al recibir el OK de la balanza (pulsador), sin importar la distancia
             if (boton_pulsado)
             {
                 boton_pulsado = false;
@@ -56,7 +55,6 @@ int main(){
             break;
 
         case ESTADO_PUERTA_BLOQUEADA:
-            // SIMULACIÓN: la mascota come durante el bloqueo y el peso baja
             if (boton_pulsado)
             {
                 boton_pulsado = false;
