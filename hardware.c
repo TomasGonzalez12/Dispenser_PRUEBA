@@ -68,12 +68,9 @@ void init_config(){
 
 void angulo_servo(uint8_t angulo)
 {
-    uint pulso_us =
-        SERVO_MIN_US +
-        (angulo * (SERVO_MAX_US - SERVO_MIN_US) / 180);
+    uint pulso_us = SERVO_MIN_US + (angulo * (SERVO_MAX_US - SERVO_MIN_US) / 180);
 
-    uint16_t level =
-        (pulso_us * (SERVO_TOP + 1)) / SERVO_PERIODO_US;
+    uint16_t level = (pulso_us * (SERVO_TOP + 1)) / SERVO_PERIODO_US;
 
     pwm_set_chan_level(slice, channel, level);
 }
@@ -114,9 +111,9 @@ void mostrar(estado_t estado, uint32_t distancia){
 
     switch (estado)
     {
-        case ESTADO_PUERTA_ABIERTA: oledPrintfXy(&oled, 0, 20, "Puerta: ABIERTA"); break;
+        case ESTADO_PUERTA_ABIERTA:   oledPrintfXy(&oled, 0, 20, "Puerta: ABIERTA"); break;
         case ESTADO_PUERTA_BLOQUEADA: oledPrintfXy(&oled, 0, 20, "Puerta: BLOQUEO"); break;
-        default:                    oledPrintfXy(&oled, 0, 20, "Puerta: CERRADA"); break;
+        default:                      oledPrintfXy(&oled, 0, 20, "Puerta: CERRADA"); break;
     }
 
     oledDisplay(&oled);
