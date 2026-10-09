@@ -91,7 +91,6 @@ uint32_t distancia_promedio(void){
         }
     }
 
-    // Si menos de la mitad de las lecturas son válidas, se considera "lejos"
     if (validas * 2 <= N_MEDICIONES)
     {
         return DISTANCIA_LEJOS;

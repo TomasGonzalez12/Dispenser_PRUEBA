@@ -12,7 +12,7 @@ int main(){
     estado_t estado = ESTADO_PUERTA_CERRADA;
     int distancia = DISTANCIA_LEJOS;
     bool bowl_lleno = false;
-    uint32_t t_cierre = 0;          // instante (ms de systick) en que se cerró la puerta
+    uint32_t t_cierre = 0;          
 
     angulo_servo(PUERTA_CERRADA);
     boton_pulsado = false;
@@ -25,7 +25,6 @@ int main(){
             //distancia = distancia_promedio();
             distancia = tofReadDistance();
 
-            // SIMULACIÓN: pulsar con la puerta cerrada = el bowl bajó del peso objetivo
             if (boton_pulsado)
             {
                 boton_pulsado = false;
@@ -61,7 +60,6 @@ int main(){
                 bowl_lleno = false;
             }
 
-            // La resta sin signo es correcta aunque el contador de ms desborde
             if ((get_systick() - t_cierre) >= TIEMPO_BLOQUEO_MS)
             {
                 estado = ESTADO_PUERTA_CERRADA;
